@@ -68,3 +68,20 @@ describe("test toRoman() with invalid inputs", () => {
     }).toThrow("Input must be between 1 and 3000");
   });
 });
+
+describe("test toRoman() with intermediary values", () => {
+  const intermediaries = [
+    [2023, "MMXXIII"],
+    [708, "DCCVIII"],
+    [307, "CCCVII"],
+    [76, "LXXVI"],
+    [22, "XXII"],
+  ] as const;
+
+  test.each(intermediaries)(
+    "value %i should return '%s'",
+    (value, expected) => {
+      expect(toRoman(value)).toBe(expected);
+    },
+  );
+});
