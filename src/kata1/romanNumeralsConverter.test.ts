@@ -1,8 +1,24 @@
 import { toRoman } from "./romanNumeralsConverter";
 
 describe("test toRoman() with individual roman numeral values", () => {
-  const numerals = ["I", "V", "X", "L", "C", "D", "M"] as const;
-  const integers = [1, 5, 10, 50, 100, 500, 1000] as const;
+  const numerals = [
+    "I",
+    "IV",
+    "V",
+    "IX",
+    "X",
+    "XL",
+    "L",
+    "XC",
+    "C",
+    "CD",
+    "D",
+    "CM",
+    "M",
+  ] as const;
+  const integers = [
+    1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000,
+  ] as const;
 
   const integerToNumeral = integers.map((val, i) => [
     val,
