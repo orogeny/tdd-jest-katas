@@ -112,7 +112,7 @@ describe("test fromRoman() with toRoman() test data", () => {
 
   const tests = [...individuals, ...threes, ...intermediaries];
 
-  test.each(tests)("input '%s' should return %i", (expected, input) => {
+  test.each(tests)("return %i given input '%s'", (expected, input) => {
     expect(fromRoman(input)).toBe(expected);
   });
 });
@@ -124,5 +124,9 @@ describe("test fromRoman() with invalid inputs", () => {
 
   test("values above MMM are out of range", () => {
     expect(() => fromRoman("MMMI")).toThrow("Value exceeds 3000");
+  });
+
+  test("non-numeral character", () => {
+    expect(() => fromRoman("A")).toThrow("Input must contain roman numerals");
   });
 });

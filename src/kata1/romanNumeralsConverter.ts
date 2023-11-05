@@ -35,6 +35,9 @@ function fromRoman(numerals: string) {
   if (!numerals) {
     throw new Error("Input must contain roman numerals");
   }
+  if (!/^[MDCLXVI]{1,}$/.test(numerals)) {
+    throw new Error("Input must contain roman numerals");
+  }
 
   let value = 0;
   let remainder = numerals;
