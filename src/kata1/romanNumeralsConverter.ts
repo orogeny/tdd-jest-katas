@@ -32,6 +32,10 @@ function toRoman(num: number) {
 }
 
 function fromRoman(numerals: string) {
+  if (!numerals) {
+    throw new Error("Input must contain roman numerals");
+  }
+
   let value = 0;
   let remainder = numerals;
 
@@ -39,6 +43,10 @@ function fromRoman(numerals: string) {
     while (remainder.startsWith(v)) {
       value += k;
       remainder = remainder.slice(v.length);
+
+      if (value > 3000) {
+        throw new Error("Value exceeds 3000");
+      }
     }
   }
   return value;

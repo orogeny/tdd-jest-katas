@@ -116,3 +116,13 @@ describe("test fromRoman() with toRoman() test data", () => {
     expect(fromRoman(input)).toBe(expected);
   });
 });
+
+describe("test fromRoman() with invalid inputs", () => {
+  test("empty string throws error", () => {
+    expect(() => fromRoman("")).toThrow("Input must contain roman numerals");
+  });
+
+  test("values above MMM are out of range", () => {
+    expect(() => fromRoman("MMMI")).toThrow("Value exceeds 3000");
+  });
+});
