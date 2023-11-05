@@ -9,6 +9,10 @@ const mapper = new Map([
 ]);
 
 function toRoman(num: number) {
+  if (num < 1 || num > 3000) {
+    throw new Error("Input must be between 1 and 3000");
+  }
+
   return mapper.get(num);
 }
 
