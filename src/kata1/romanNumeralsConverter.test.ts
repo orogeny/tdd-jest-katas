@@ -1,31 +1,23 @@
-import { toRoman } from "./romanNumeralsConverter";
+import { fromRoman, toRoman } from "./romanNumeralsConverter";
 
 describe("test toRoman() with individual roman numeral values", () => {
-  const numerals = [
-    "I",
-    "IV",
-    "V",
-    "IX",
-    "X",
-    "XL",
-    "L",
-    "XC",
-    "C",
-    "CD",
-    "D",
-    "CM",
-    "M",
-  ] as const;
-  const integers = [
-    1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000,
+  const individuals = [
+    [1, "I"],
+    [4, "IV"],
+    [5, "V"],
+    [9, "IX"],
+    [10, "X"],
+    [40, "XL"],
+    [50, "L"],
+    [90, "XC"],
+    [100, "C"],
+    [400, "CD"],
+    [500, "D"],
+    [900, "CM"],
+    [1000, "M"],
   ] as const;
 
-  const integerToNumeral = integers.map((val, i) => [
-    val,
-    numerals[i],
-  ]) as Array<[number, string]>;
-
-  test.each(integerToNumeral)(
+  test.each(individuals)(
     "value %i should return numeral '%s'",
     (value, expected) => {
       expect(toRoman(value)).toBe(expected);
@@ -84,4 +76,43 @@ describe("test toRoman() with intermediary values", () => {
       expect(toRoman(value)).toBe(expected);
     },
   );
+});
+
+describe("test fromRoman() with toRoman() test data", () => {
+  const individuals = [
+    [1, "I"],
+    [4, "IV"],
+    [5, "V"],
+    [9, "IX"],
+    [10, "X"],
+    [40, "XL"],
+    [50, "L"],
+    [90, "XC"],
+    [100, "C"],
+    [400, "CD"],
+    [500, "D"],
+    [900, "CM"],
+    [1000, "M"],
+  ] as const;
+
+  const threes = [
+    [3, "III"],
+    [30, "XXX"],
+    [300, "CCC"],
+    [3000, "MMM"],
+  ] as const;
+
+  const intermediaries = [
+    [2023, "MMXXIII"],
+    [708, "DCCVIII"],
+    [307, "CCCVII"],
+    [76, "LXXVI"],
+    [22, "XXII"],
+  ] as const;
+
+  const tests = [...individuals, ...threes, ...intermediaries];
+
+  test.each(tests)("input '%s' should return %i", (expected, input) => {
+    expect(fromRoman(input)).toBe(expected);
+  });
 });

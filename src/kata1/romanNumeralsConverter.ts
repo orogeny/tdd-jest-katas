@@ -31,4 +31,17 @@ function toRoman(num: number) {
   return numerals;
 }
 
-export { toRoman };
+function fromRoman(numerals: string) {
+  let value = 0;
+  let remainder = numerals;
+
+  for (const [k, v] of mapper) {
+    while (remainder.startsWith(v)) {
+      value += k;
+      remainder = remainder.slice(v.length);
+    }
+  }
+  return value;
+}
+
+export { fromRoman, toRoman };
