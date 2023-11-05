@@ -33,6 +33,22 @@ describe("test toRoman() with individual roman numeral values", () => {
   );
 });
 
+describe("test toRoman() I, X, C, M are only repeats", () => {
+  const threes = [
+    [3, "III"],
+    [30, "XXX"],
+    [300, "CCC"],
+    [3000, "MMM"],
+  ] as const;
+
+  test.each(threes)(
+    "value %i should return numeral '%s'",
+    (value, expected) => {
+      expect(toRoman(value)).toBe(expected);
+    },
+  );
+});
+
 describe("test toRoman() with invalid inputs", () => {
   test("passing a negative numbers should throw an error", () => {
     expect(() => {

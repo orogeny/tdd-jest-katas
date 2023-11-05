@@ -19,7 +19,16 @@ function toRoman(num: number) {
     throw new Error("Input must be between 1 and 3000");
   }
 
-  return mapper.get(num);
+  let numerals = "";
+  let remainder = num;
+
+  for (const [k, v] of mapper) {
+    while (remainder >= k) {
+      numerals += v;
+      remainder -= k;
+    }
+  }
+  return numerals;
 }
 
 export { toRoman };
