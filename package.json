@@ -9,7 +9,7 @@
     "url": "https://github.com/orogeny"
   },
   "scripts": {
-    "build": "tsc --project tsconfig.build.json",
+    "build": "tsc",
     "start": "nodemon src/index.ts",
     "test": "jest --watch"
   },
