@@ -16,6 +16,10 @@ describe("test calcScore() function", () => {
   test("test games with spares", () => {
     expect(calcScore("5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/5")).toBe(150);
   });
+
+  test("test games with strikes", () => {
+    expect(calcScore("X X X X X X X X X X X X")).toBe(300);
+  });
 });
 
 // 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/5     need to process a '/', look ahead one
@@ -23,5 +27,7 @@ describe("test calcScore() function", () => {
 // One look ahead...
 // 1. handle '/' character
 // 2. handle single look ahead
+// ---- done ----
 
 // X X X X X X X X X X X X            need to process a 'x', look ahead two.  These 2 cases, final frame is interesting
+// 1. need to handle 'x' character
