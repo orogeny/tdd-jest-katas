@@ -6,7 +6,7 @@ import { calcScore } from "./calcScore";
 
 describe("test calcScore() function", () => {
   test("test no look ahead case", () => {
-    expect(calcScore("9- 9- 9- 9- 9- 9- 9- 9- 9- 9-")).toBe(90);
+    expect(calcScore("-9 9- 9- 9- 9- 9- 9- 9- 9- 9-")).toBe(90);
   });
 });
 
