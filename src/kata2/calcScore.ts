@@ -14,33 +14,35 @@ const parseFrame = (frame: string[]) => {
   }
 };
 
+const addBonuses = (frame: number[], i: number, frames: number[][]) => {
+  if (i >= 9) return frame; // just output last frame as-is
+
+  if (frame.length === 1) {
+    // we have a strike
+    if (frames[i + 1].length === 2) {
+      // next frame used both balls
+      return [10, ...frames[i + 1]];
+    } else {
+      // next frame was a strike, so add 10 and first
+      // attempt of next frame along
+      return [10, 10, frames[i + 2][0]];
+    }
+  } else {
+    // check for lookahead
+    const [a, b] = frame;
+
+    if (a + b < 10) return frame;
+
+    return [...frame, frames[i + 1][0]];
+  }
+};
+
 function calcScore(input: string) {
   const score = input
     .split(" ")
     .map((frame) => [...frame])
     .map(parseFrame)
-    .map((frame, i, frames) => {
-      if (i >= 9) return frame; // just output last frame as-is
-
-      if (frame.length === 1) {
-        // we have a strike
-        if (frames[i + 1].length === 2) {
-          // next frame used both balls
-          return [10, ...frames[i + 1]];
-        } else {
-          // next frame was a strike, so add 10 and first
-          // attempt of next frame along
-          return [10, 10, frames[i + 2][0]];
-        }
-      } else {
-        // check for lookahead
-        const [a, b] = frame;
-
-        if (a + b < 10) return frame;
-
-        return [...frame, frames[i + 1][0]];
-      }
-    })
+    .map(addBonuses)
     .flat()
     .reduce((score, pins) => (score += pins));
 
